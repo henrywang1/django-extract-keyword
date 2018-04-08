@@ -9,7 +9,7 @@ def index(request):
     #r = requests.get('http://httpbin.org/status/418')
     tags = jieba.analyse.extract_tags(
         '今天的天氣非常好，適合到台灣大學走走，晚上吃拉麵',
-        topK=topK, withWeight=False)
+        topK=10, withWeight=False)
 
     print(tags)
     return HttpResponse('<pre>' + tags + '</pre>')
