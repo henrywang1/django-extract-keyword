@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "801caaac922241b9135526a5c8557ae3f94b41dd13f62dfe431c676164c8a67b"
+            "sha256": "2fa56f94715199b600649ce33e8514d6cfe61093d9cb968348efa1075b590a78"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -63,6 +63,12 @@
                 "sha256:8c7309c718f94b3a625cb648ace320157ad16ff131ae0af362c9f21b80ef6ec4"
             ],
             "version": "==2.6"
+        },
+        "jieba": {
+            "hashes": [
+                "sha256:de385e48582a4862e55a9167334d0fbe91d479026e5dac40e59e22c08b8e883e"
+            ],
+            "version": "==0.39"
         },
         "psycopg2": {
             "hashes": [
