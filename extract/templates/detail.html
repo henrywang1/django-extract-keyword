@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="alert alert-success" id="success-alert">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>Success! </strong>
+    </div>
+    <div class="container">
+            <div class="row">
+          <div class="col-xs-12 col-sm-8 col-md-8">
+
+                <h2 class="mt-3 text-center">關鍵字擷取&nbsp;
+                    <button class="btn btn-secondary" onclick="extractTag()">Start</button>
+                    <button id="copyTag" class="btn btn-secondary" style="display:none" onclick="copyTag()">Copy Tags</button>
+                </h2>
+                <input value="" data-role="tagsinput" id='tagsinput'/>
+                <textarea placeholder="貼上要擷取關鍵字的文章!" rows="18" id='article' style="min-width: 100%"></textarea>
+              </div>              
+            </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src= "{% static "vendor/jquery/jquery.min.js" %}"></script>
+    <script src= "{% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script> 
+    <!-- Bootstrap tags -->
+    <script src="{% static "vendor/tagsinput/tagsinput.js" %}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#success-alert").hide();
+        });
+        const csrftoken = Cookies.get('csrftoken');
+        function copyTag() {
+            const tags = $('#tagsinput').tagsinput('items')
+            const tags_text = tags.map(x => x.split(" (")[0]);
+            const dummy = document.createElement("input");
+            document.body.appendChild(dummy);
+            dummy.setAttribute('value', tags_text);
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+            $("#success-alert").text("已複製: " + tags_text);
+            $("#success-alert").fadeTo(3000, 500).slideUp(500, function () {
+                $("#success-alert").slideUp(500);
+            });
+        }
+
+        function extractTag() {
+            const formData = new FormData();
+            const articleContent = document.querySelector('#article').value
+            formData.append('article', articleContent);
+
+            fetch('/vote/', {
+                method: 'post',
+                credentials: "same-origin",
+                headers: {
+                    "X-CSRFToken": csrftoken,
+                    "Accept": "application/json",
+                },
+                body: formData
+            }
+            
+            ).then(function (response) {
+                return response.json();
+            }).then(function (myJson) {
+                $('#tagsinput').tagsinput('removeAll');
+                for (s of myJson.tags) {
+                    textinput = s[0]+ ' (' + Number((s[1]).toFixed(2)) + '),'
+                    $('#tagsinput').tagsinput('add', textinput);
+                }
+
+                if(myJson.tags.length >0) {
+                    document.querySelector('#copyTag').style.display = '';
+                }
+            });
+        }
+    </script>
+{% endblock %}
+
+
