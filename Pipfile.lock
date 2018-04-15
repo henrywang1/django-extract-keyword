@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b75ed9e2c9f4d66318fa5d4403981b40dd607c7a8d2e5af0ba21aae59e9633c0"
+            "sha256": "f65c2aae665067ab8bb51bab012fb01bd4215f5c135c789ed78c606c34b204ee"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -15,6 +15,10 @@
         ]
     },
     "default": {
+        "a9ad57a": {
+            "editable": true,
+            "path": "./jieba"
+        },
         "certifi": {
             "hashes": [
                 "sha256:14131608ad2fd56836d33a71ee60fa1c82bc9d2c8d98b7bdbc631fe1b3cd1296",
