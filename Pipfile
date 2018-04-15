@@ -7,6 +7,7 @@ Django = "*"
 gunicorn = "*"
 django-heroku = "*"
 requests = "*"
+"3244747" = {path = "./../jieba"}
 
 [requires]
 python_version = "3.6"

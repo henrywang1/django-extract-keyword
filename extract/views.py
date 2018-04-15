@@ -56,21 +56,14 @@ def index(request):
     
 import sys
 import os
-#print(os.getcwd())
-
-# sys.path.insert(0, os.getcwd()+'/extract/jieba/')
-sys.path.insert(0, './extract')
-sys.path.insert(0, './extract/jieba')
-
-print(sys.path)
 import jieba
-print(jieba.__version__)
 import jieba.analyse
+# print(jieba.__version__)
 
 jieba.load_userdict("./extract/dict_with_cnt.txt")
 jieba.analyse.set_stop_words("./extract/ntub_stop_words.txt")
-from django.http import JsonResponse
 
+from django.http import JsonResponse
 @login_required
 def vote(request):
     try:
