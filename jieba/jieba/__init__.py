@@ -34,12 +34,11 @@ DICT_WRITING = {}
 
 pool = None
 
-#re_userdict = re.compile('^(.+?)( [0-9]+)?( [a-z]+)?$', re.U)
 re_userdict = re.compile('^(.+?)@@([\s0-9]+)@@([\sa-z]+)?$', re.U)
 re_eng = re.compile('[a-zA-Z0-9\.]', re.U)
+re_non_eng = re.compile('[^a-zA-Z0-9\s\-_\.]', re.U)
 
-#一定要有中文 或中文數字混雜
-re_han_default = re.compile("([\u4E00-\u9FD5\u00B7]+[0-9\._-]*)", re.U)
+re_han_default = re.compile("(.*)", re.U)
 re_skip_default = re.compile("(\r\n|\s)", re.U)
 
 from string import punctuation
@@ -187,18 +186,33 @@ class Tokenizer(object):
         self.check_initialized()
         DAG = {}
         N = len(sentence)
-        for k in xrange(N):
+        k=0
+        while(k<N):
             tmplist = []
             i = k
             frag = sentence[k]
-            while i < N and frag in self.FREQ:
-                if self.FREQ[frag]:
-                    tmplist.append(i)
+            if ord(sentence[k]) < 128:
+                end = re.search(re_non_eng, sentence[k:])
+                end = end.start() if end else (N-k)
+                DAG[k] = [k+end-1]
+                for j in range(k+1, k+end): #skip the remaining items
+                    DAG[j] = [j]
+                
+                k+=end
+                continue
+
+            while i < N:
+                if self.FREQ.get(frag):
+                    tmplist.append(i) 
                 i += 1
                 frag = sentence[k:i + 1]
             if not tmplist:
                 tmplist.append(k)
+            
+            
             DAG[k] = tmplist
+            k+=1
+            
         return DAG
 
     def __cut_all(self, sentence):
@@ -305,16 +319,12 @@ class Tokenizer(object):
         for blk in blocks:
             if not blk:
                 continue
-            tmp = re_han.split(blk)
-            for x in tmp: 
-                if re_han.match(x):
-                    for word in cut_block(x):
-                        yield word
-                elif re_skip.match(x):
-                    for xx in x:
-                        yield xx
-                else:
-                    yield x.lstrip().rstrip() #英文
+            if re_skip.match(blk):
+                for xx in blk:
+                    yield xx
+            else:
+                for word in cut_block(blk):
+                    yield word.lstrip().rstrip()
 
     def cut_for_search(self, sentence, HMM=True):
         """
