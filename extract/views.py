@@ -69,7 +69,7 @@ def vote(request):
         article = request.POST.get('article')
         title = request.POST.get('title')
         if title:
-            article = (title + '\n')*5 + article
+            article = (title + '\n')*10 + article
 
         tags = jieba.analyse.extract_tags(article, topK=15, withWeight=True)
 
