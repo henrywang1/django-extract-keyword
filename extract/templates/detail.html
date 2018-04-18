@@ -15,7 +15,8 @@
                     <button id="copyTag" class="btn btn-secondary" style="display:none" onclick="copyTag()">Copy Tags</button>
                 </h2>
                 <input value="" data-role="tagsinput" id='tagsinput'/>
-                <textarea placeholder="貼上要擷取關鍵字的文章!" rows="18" id='article' style="min-width: 100%"></textarea>
+                <input  class="form-control" placeholder="文章標題 (optional)" id='title' style="min-width: 100%"></input>
+                <textarea class="form-control" placeholder="貼上要擷取關鍵字的文章!" rows="18" id='article' style="min-width: 100%"></textarea>
               </div>              
             </div>
     </div>
@@ -51,7 +52,9 @@
         function extractTag() {
             const formData = new FormData();
             const articleContent = document.querySelector('#article').value
+            const articleTitle = document.querySelector('#title').value
             formData.append('article', articleContent);
+            formData.append('title', articleTitle);
 
             fetch('/vote/', {
                 method: 'post',

@@ -58,7 +58,6 @@ import sys
 import os
 import jieba
 import jieba.analyse
-# print(jieba.__version__)
 
 jieba.load_userdict("./extract/dict_with_cnt.txt")
 jieba.analyse.set_stop_words("./extract/ntub_stop_words.txt")
@@ -68,7 +67,12 @@ from django.http import JsonResponse
 def vote(request):
     try:
         article = request.POST.get('article')
+        title = request.POST.get('title')
+        if title:
+            article = (title + '\n')*5 + article
+
         tags = jieba.analyse.extract_tags(article, topK=15, withWeight=True)
+
         return JsonResponse({'tags':tags})
     except (KeyError):
         return JsonResponse({'tags':''})
