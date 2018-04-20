@@ -16,3 +16,6 @@ textrank = default_textrank.extract_tags
 def set_stop_words(stop_words_path):
     default_tfidf.set_stop_words(stop_words_path)
     default_textrank.set_stop_words(stop_words_path)
+
+def add_stop_word(word):
+    default_tfidf.add_stop_word(word)

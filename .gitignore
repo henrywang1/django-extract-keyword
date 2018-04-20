@@ -5,3 +5,5 @@ staticfiles
 db.sqlite3
 .DS_Store
 .vscode
+local_test.py
+

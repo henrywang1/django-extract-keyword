@@ -30,6 +30,9 @@ class KeywordExtractor(object):
 
     def extract_tags(self, *args, **kwargs):
         raise NotImplementedError
+    
+    def add_stop_word(self, word):
+        self.stop_words.add(word)
 
 
 class IDFLoader(object):

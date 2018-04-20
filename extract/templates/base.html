@@ -9,15 +9,9 @@
     <title>關鍵字擷取 Demo</title>
 
     <!-- Bootstrap core CSS -->
-    {% comment %} <link href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet"> {% endcomment %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
-    {% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap-theme.min.css"> {% endcomment %}
-    {% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap-theme.min.css"> {% endcomment %}
-    {% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css"> {% endcomment %}
-
     <link rel="stylesheet" type="text/css" href="{% static "css/my-login.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/tagsinput.css" %}">
-    {% comment %} <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/themes/github.css"> {% endcomment %}
     <style>
       body {
         padding-top: 54px;
@@ -46,7 +40,11 @@
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'admin:index'%}">管理介面
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
 
             {% if user.is_authenticated %}
             <li class="nav-item active">
