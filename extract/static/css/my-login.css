@@ -72,6 +72,8 @@ body.my-login-page {
 }
 
 
+/* RWD  */
+
 @media screen and (max-width: 425px) {
 	.my-login-page .card-wrapper {
 		width: 90%;
@@ -89,6 +91,11 @@ body.my-login-page {
 }
 
 @media screen and (max-width: 320px) {
+	.nav-customized {
+		font-size: 0.8rem;
+		margin-right: 0px;
+	}
+
 	.my-login-page .card.fat {
 		padding: 0;
 	}
@@ -97,4 +104,3 @@ body.my-login-page {
 		padding: 15px;
 	}
 }
-

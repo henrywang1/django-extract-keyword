@@ -2,30 +2,34 @@
 {% load staticfiles %}
 
 {% block content %}
-    <div class="alert alert-success" id="success-alert">
-            <button type="button" class="close" data-dismiss="alert">x</button>
-            <strong>Success! </strong>
+    <div class="alert alert-success cus-alert" id="success-alert">
+          <button type="button" class="close" data-dismiss="alert">x</button>
+          <strong>Success! </strong>
     </div>
-    <div class="container">
-            <div class="row">
+    <div class="container cus-tag-container">
+        <div class="row">
           <div class="col-xs-12 col-sm-8 col-md-8">
+              <div class="start-container">
+                <h2 class="demo-title">關鍵字擷取</h2>
+                <button class="btn btn-secondary cus-start" onclick="extractTag()">Start</button>
+                <button id="copyTag" class="btn btn-secondary" style="display:none" onclick="copyTag()">Copy Tags</button>
+              </div>
 
-                <h2 class="mt-3 text-center">關鍵字擷取&nbsp;
-                    <button class="btn btn-secondary" onclick="extractTag()">Start</button>
-                    <button id="copyTag" class="btn btn-secondary" style="display:none" onclick="copyTag()">Copy Tags</button>
-                </h2>
-                <input value="" data-role="tagsinput" id='tagsinput'/>
-                <input  class="form-control" placeholder="文章標題 (optional)" id='title' style="min-width: 100%"></input>
-                <textarea class="form-control" placeholder="貼上要擷取關鍵字的文章!" rows="18" id='article' style="min-width: 100%"></textarea>
-              </div>              
-            </div>
+
+              <input value="" data-role="tagsinput" id='tagsinput' placeholder="輸入自訂關鍵字 (optional)"/>
+              <input  id='title' placeholder="文章標題 (optional)" style="min-width: 100%"></input>
+              <textarea placeholder="貼上要擷取關鍵字的文章!" rows="18" id='article' style="min-width: 100%"></textarea>
+          </div>
+        </div>
+
+        <a href="#" class="top-link">Go to Top</a>
     </div>
 
 
     <!-- Bootstrap core JavaScript -->
     <script src= "{% static "vendor/jquery/jquery.min.js" %}"></script>
     <script src= "{% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <!-- Bootstrap tags -->
     <script src="{% static "vendor/tagsinput/tagsinput.js" %}"></script>
 
@@ -65,7 +69,7 @@
                 },
                 body: formData
             }
-            
+
             ).then(function (response) {
                 return response.json();
             }).then(function (myJson) {
@@ -82,5 +86,3 @@
         }
     </script>
 {% endblock %}
-
-

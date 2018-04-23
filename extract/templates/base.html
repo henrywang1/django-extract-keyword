@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static "css/my-login.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/tagsinput.css" %}">
+    <link rel="icon" href="{% static "favicon.ico" %}" type="image/x-icon">
     <style>
       body {
         padding-top: 54px;
@@ -29,14 +30,14 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand nav-customized" href="https://www.cw.com.tw/">《天下雜誌》x《人工智慧學校》</a>
+        <a class="navbar-brand nav-customized" href="https://www.cw.com.tw" target="_blank">《天下雜誌》x《人工智慧學校》</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href=".">Home
+              <a class="nav-link" href="/">首頁
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -48,7 +49,7 @@
 
             {% if user.is_authenticated %}
             <li class="nav-item active">
-              <a class="nav-link" href="{% url 'logout'%}?next=/">Logout 
+              <a class="nav-link" href="{% url 'logout'%}?next=/">登出
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -61,4 +62,3 @@
     {% endblock %}
 </body>
 </html>
-
