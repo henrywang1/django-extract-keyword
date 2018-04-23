@@ -1,5 +1,5 @@
 from django.shortcuts import  render
-from .models import Keyword
+from .models import Keyword, StopWord
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -10,9 +10,10 @@ def index(request):
     
 import sys
 import os
+from django.db.models import Max
+
 import jieba
 import jieba.analyse
-from django.db.models import Max
 
 # Now, we load user dict and stop words from db
 # jieba.load_userdict("./extract/dict_with_cnt.txt")
@@ -29,13 +30,13 @@ def keyword_saved_handler(sender, instance, **kwargs):
 
 class KeywordView(LoginRequiredMixin, View):
     def __init__(self, *args, **kwargs):
-        for k in Keyword.objects.all():
-            jieba.add_word(str(k), 999, 'n')
         self.login_url = '/login/'
 
     def post(self, request):
         try:
+
             article = request.POST.get('article')
+            
             title = request.POST.get('title')
             if title:
                 article = (title + '\n')*10 + article
@@ -46,7 +47,7 @@ class KeywordView(LoginRequiredMixin, View):
 
     @staticmethod
     def add_keyword(sender, instance, **kwargs):
-        #print('add ' + str(instance))
+        # print('add ' + str(instance))
         jieba.add_word(str(instance), 999, 'n')
     
     @staticmethod
@@ -62,4 +63,4 @@ class KeywordView(LoginRequiredMixin, View):
     @staticmethod
     def delete_stop_word(sender, instance, **kwargs):
         #print('delete stop' + str(instance))
-        jieba.analyse.add_stop_word(str(instance))
+        jieba.analyse.del_stop_word(str(instance))

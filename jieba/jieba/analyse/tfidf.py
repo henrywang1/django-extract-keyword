@@ -34,6 +34,9 @@ class KeywordExtractor(object):
     def add_stop_word(self, word):
         self.stop_words.add(word)
 
+    def del_stop_word(self, word):
+        self.stop_words.discard(word)
+
 
 class IDFLoader(object):
 

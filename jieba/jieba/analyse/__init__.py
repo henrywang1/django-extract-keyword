@@ -19,3 +19,6 @@ def set_stop_words(stop_words_path):
 
 def add_stop_word(word):
     default_tfidf.add_stop_word(word)
+
+def del_stop_word(word):
+    default_tfidf.del_stop_word(word)
