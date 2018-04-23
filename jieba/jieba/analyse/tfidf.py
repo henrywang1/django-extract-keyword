@@ -53,8 +53,12 @@ class IDFLoader(object):
             content = open(new_idf_path, 'rb').read().decode('utf-8')
             self.idf_freq = {}
             for line in content.splitlines():
-                word, freq = line.strip().split('@@')
-                self.idf_freq[word] = float(freq)
+                try:
+                    word, freq = line.strip().split('@@')
+                    self.idf_freq[word] = float(freq)
+                except:
+                    print('error in idf: '+ line)
+                    pass
             self.median_idf = sorted(
                 self.idf_freq.values())[len(self.idf_freq) // 2]
 
@@ -104,7 +108,9 @@ class TFIDF(KeywordExtractor):
                 elif not withFlag:
                     w = w.word
             wc = w.word if allowPOS and withFlag else w
-            if len(wc.strip()) < 2 or wc.lower() in self.stop_words:
+            if len(wc.strip()) < 2 or wc.lower() in self.stop_words \
+                or wc.replace('.','').isdigit() or wc.startswith('.')\
+                or wc.startswith('⋯') or wc.startswith('…') or wc.startswith('─') or wc.startswith('―'):
                 continue
             freq[w] = freq.get(w, 0.0) + 1.0
         total = sum(freq.values())

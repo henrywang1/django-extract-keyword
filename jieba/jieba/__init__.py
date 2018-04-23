@@ -36,7 +36,7 @@ pool = None
 
 re_userdict = re.compile('^(.+?)@@([\s0-9]+)@@([\sa-z]+)?$', re.U)
 re_eng = re.compile('[a-zA-Z0-9\.]', re.U)
-re_non_eng = re.compile('[^a-zA-Z0-9\s\-_\.]', re.U)
+re_non_eng = re.compile('[^a-zA-Z0-9\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff\s\-_\.]', re.U)
 
 re_han_default = re.compile("(.*)", re.U)
 re_skip_default = re.compile("(\r\n|\s)", re.U)
@@ -194,12 +194,15 @@ class Tokenizer(object):
             if ord(sentence[k]) < 128:
                 end = re.search(re_non_eng, sentence[k:])
                 end = end.start() if end else (N-k)
-                DAG[k] = [k+end-1]
-                for j in range(k+1, k+end): #skip the remaining items
-                    DAG[j] = [j]
-                
-                k+=end
-                continue
+                if end == 0: #ascii 裡面的確是有非英文的
+                    DAG[k] = [k]
+                else:
+                    DAG[k] = [k+end-1]
+                    for j in range(k+1, k+end): #skip the remaining items
+                        DAG[j] = [j]
+
+                    k+=end
+                    continue
 
             while i < N:
                 if self.FREQ.get(frag):
