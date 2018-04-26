@@ -3,7 +3,7 @@ from .models import Keyword, StopWord
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from tensorflow.python import debug as tf_debug
+# from tensorflow.python import debug as tf_debug
 
 @login_required
 def index(request):
@@ -27,8 +27,8 @@ from django.http import JsonResponse
 from django.dispatch import receiver
 from django.db.models.signals import post_save, post_delete
 from .trend import word_related
-from .pointer_generator.write_bin import write_to_bin 
-from .pointer_generator.inference import inference
+# from .pointer_generator.write_bin import write_to_bin 
+# from .pointer_generator.inference import inference
 
 
 def keyword_saved_handler(sender, instance, **kwargs):

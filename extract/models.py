@@ -13,7 +13,7 @@ class StopWord(models.Model):
     def __str__(self):
         return self.stop_word
 
-class Word2Vec(models.Model):
+class Word2VecModel(models.Model):
     base  = models.BinaryField()
     syn0  = models.BinaryField()
     syn1neg  = models.BinaryField()

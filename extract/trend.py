@@ -8,6 +8,8 @@ import pickle
 import gensim
 from sklearn import cluster
 import math
+import pandas as pd
+from .models import Word2VecModel
 
 # c.execute('''SELECT a FROM images''')
 # mview = c.fetchone()
@@ -19,6 +21,7 @@ with open ('./extract/cluster_dict.pickle', 'rb') as f:
 
 model = gensim.models.Word2Vec.load('./extract/skip-gram-mc1') 
 dict_relate = {}
+# model_binary = Word2VecModel.fetchone()
 
 def get_cluster(input_list):
     NUM_CLUSTERS = math.ceil(len(input_list)/5)
