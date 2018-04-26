@@ -9,6 +9,8 @@ django-heroku = "*"
 requests = "*"
 "a9ad57a" = {path = "./jieba", editable = true}
 pytrends = "*"
+gensim = "*"
+sklearn = "*"
 
 [requires]
 python_version = "3.6"
@@ -16,3 +18,4 @@ python_version = "3.6"
 [dev-packages]
 pylint = "*"
 "autopep8" = "*"
+rope = "*"

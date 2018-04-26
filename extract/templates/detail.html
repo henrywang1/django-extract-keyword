@@ -92,7 +92,7 @@
                 if(myJson.tags.length >0) {
                     document.querySelector('#copyTag').style.display = '';
                     //console.log(tags)
-                    //getTrend(tags);
+                    getTrend(tags);
                 }
                 
             });
@@ -126,12 +126,21 @@
                 //for (item of myJson) {
                      
                 outputHTML = '<ul>'
-                for (const [key, value] of result.entries()) {
+                //each value is a dict
+                for (const [key, dict] of result.entries()) { 
                     outputHTML+= '<li>';
-                    Object.keys(value).forEach(function(k) {
-                        console.log(k, value[k]);
-                        outputHTML+= '('+ k + ',' + ' ' + value[k]+') ';
+                    // Create items array
+                    var items = Object.keys(dict).map(function(k) {
+                        return [k, dict[k]];
                     });
+
+                    // Sort the array based on the second element
+                    items.sort(function (first, second) {
+                        return second[1] - first[1];
+                    });
+                    for ([k, v] of items) {
+                        outputHTML+= '('+ k + ',' + ' ' + v+') ';
+                    }
                     outputHTML+= '</li>';
                 }
                 outputHTML += '</ul>'
