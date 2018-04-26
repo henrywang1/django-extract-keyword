@@ -22,11 +22,26 @@ import jieba.analyse
 from django.http import JsonResponse
 from django.dispatch import receiver
 from django.db.models.signals import post_save, post_delete
+from .trend import word_related
 
 
 def keyword_saved_handler(sender, instance, **kwargs):
     print("post_save finished!")
 
+import json
+class TrendView(LoginRequiredMixin, View):
+    def post(self, request):
+        try:
+            tags = request.POST.get('tags')
+            tags = tags.split(',')
+            for t in tags:
+                print(t)
+            print(tags)
+            if tags:
+                ret = (word_related(tags))
+                return JsonResponse({'trend': ret})
+        except (KeyError):
+            return JsonResponse({'trend':''})
 
 class KeywordView(LoginRequiredMixin, View):
     def __init__(self, *args, **kwargs):
@@ -34,14 +49,12 @@ class KeywordView(LoginRequiredMixin, View):
 
     def post(self, request):
         try:
-
             article = request.POST.get('article')
-            
             title = request.POST.get('title')
             if title:
                 article = (title + '\n')*10 + article
             tags = jieba.analyse.extract_tags(article, topK=15, withWeight=True)
-            return JsonResponse({'tags':tags})
+            return JsonResponse({'tags': tags})
         except (KeyError):
             return JsonResponse({'tags':''})
 

@@ -11,3 +11,7 @@ command2.txt
 db.sqlite3
 .ipynb_checkpoints/Untitled-checkpoint.ipynb
 Untitled.ipynb
+keyword.sql
+jieba/jieba/analyse/idf.txt
+dict_with_cnt.txt
+keyword.sql

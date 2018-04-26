@@ -8,6 +8,7 @@ gunicorn = "*"
 django-heroku = "*"
 requests = "*"
 "a9ad57a" = {path = "./jieba", editable = true}
+pytrends = "*"
 
 [requires]
 python_version = "3.6"

@@ -113,7 +113,7 @@ h2.demo-title {
   cursor: pointer;
 }
 .bootstrap-tagsinput .badge [data-role="remove"]:after {
-  content: "×";
+  content: "x";
   padding: 0px 4px;
   background-color:rgba(0, 0, 0, 0.3);
   border-radius:50%;
@@ -143,9 +143,20 @@ h2.demo-title {
   right: 25px;
 }
 
-@media screen and (max-width: 320px) {
+#trend {
+  width: 25vw;
+  margin-top: 110px;
+}
+
+@media screen and (max-width: 480px) {
   h2.demo-title {
     width: 100%;
     margin-bottom: 5px;
   }
+
+  #trend {
+    width: 92vw;
+    margin-top: 0;
+  }
 }
+

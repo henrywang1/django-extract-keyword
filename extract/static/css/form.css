@@ -1,0 +1,23 @@
+.submit-row a.deletelink {
+  height: 35px;
+}
+
+ul.messagelist li {
+  margin: 10px 0 10px 0;
+}
+
+form .aligned ul {
+  margin-left: 0;
+  padding-left: 0;
+  width: 100%;
+}
+
+.aligned label {
+  width: initial;
+}
+
+.delete-confirmation form .cancel-link {
+  line-height: 20px;
+  height: 42px;
+  font-size: 16px;
+}
