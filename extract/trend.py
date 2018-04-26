@@ -16,10 +16,11 @@ from .models import Word2VecModel
 # new_bin_data = bytes(mview)
 # print(new_bin_data)
 
-with open ('./extract/cluster_dict.pickle', 'rb') as f:
-    cluster_dict = pickle.load(f)
-
-model = gensim.models.Word2Vec.load('./extract/skip-gram-mc1') 
+# with open ('./extract/cluster_dict.pickle', 'rb') as f:
+#     cluster_dict = pickle.load(f)
+cluster_dict = {}
+# model = gensim.models.Word2Vec.load('./extract/skip-gram-mc1') 
+model = None
 dict_relate = {}
 # model_binary = Word2VecModel.fetchone()
 
