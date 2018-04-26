@@ -10,40 +10,61 @@ from sklearn import cluster
 import math
 import pandas as pd
 from .models import Word2VecModel
+import os.path
 
-# c.execute('''SELECT a FROM images''')
-# mview = c.fetchone()
-# new_bin_data = bytes(mview)
-# print(new_bin_data)
+import boto3
+import botocore
 
-# with open ('./extract/cluster_dict.pickle', 'rb') as f:
-#     cluster_dict = pickle.load(f)
-cluster_dict = {}
-# model = gensim.models.Word2Vec.load('./extract/skip-gram-mc1') 
-model = None
+BUCKET_NAME = 'w2v-us-east-1' # replace with your bucket name
+#KEY = 'skip-gram-mc1' # replace with your object key
+s3 = boto3.resource('s3')
+
+def download_from_s3(file_name):
+    print('start to download: ' + file_name)
+    if os.path.isfile('./extract/' + file_name):
+        print("File already exist")
+        return
+    try:
+        s3.Bucket(BUCKET_NAME).download_file(file_name, file_name)
+    except botocore.exceptions.ClientError as e:
+        if e.response['Error']['Code'] == "404":
+            print("The object does not exist.")
+        else:
+            raise
+
+download_from_s3('skip-gram-mc1')
+download_from_s3('skip-gram-mc1.syn1neg.npy')
+download_from_s3('skip-gram-mc1.wv.syn0.npy')
+download_from_s3('cluster_dict.pickle')
+
+with open ('./extract/cluster_dict.pickle', 'rb') as f:
+     cluster_dict = pickle.load(f)
+
+model = gensim.models.Word2Vec.load('./extract/skip-gram-mc1') 
 dict_relate = {}
-# model_binary = Word2VecModel.fetchone()
 
 def get_cluster(input_list):
     NUM_CLUSTERS = math.ceil(len(input_list)/5)
-    input_list = [i for i in input_list if i in cluster_dict]
+    input_list_new = [i for i in input_list if i in cluster_dict]
     kmeans = cluster.KMeans(n_clusters=NUM_CLUSTERS)
-    X = model[input_list]
+    X = model[input_list_new]
     kmeans.fit(X)
     labels = kmeans.labels_
 
     final_list = [[] for i in range(NUM_CLUSTERS)]
-    for idx, item in enumerate(input_list):
+    for idx, item in enumerate(input_list_new):
         gp = labels[idx]
         final_list[gp].append(item)
+
+    input_list_old = [i for i in input_list if i not in input_list_new]
+    final_list.append(input_list_old)
+    
     return final_list
 
 def get_topk_related(keyword, k=3):
-    print(keyword)
-    print(dict_relate)
+
     if keyword in dict_relate:
         return dict_relate[keyword]
-    print('keyword={0}'.format(keyword))
     pytrends.build_payload([keyword], cat=0, timeframe='today 1-m', geo='', gprop='')
     ret = list(pytrends.related_topics().values())[0]
     ret = set(ret.title[0:k].values) if ret is not None else None
@@ -53,10 +74,7 @@ def get_topk_related(keyword, k=3):
 def extend_result(item_list): 
     if len(item_list) >=5:
         return item_list
-    print('item_list=')
-    print(item_list)
-    # for item in item_list:
-    #     print(item)
+
     all_relate = [get_topk_related(item) for item in item_list]
     all_relate = [item for sublist in all_relate if sublist for item in sublist]
     all_relate = Counter(all_relate).most_common()
@@ -95,6 +113,7 @@ def get_trend_result(result):
                 r1=df_1
                 r2=df_2
             interest_over_time_df = pd.concat([r1, r2])
+            interest_over_time_df = interest_over_time_df.map(lambda x: '%d' % round(x))
             interest_over_time_df = interest_over_time_df.to_dict()
             result_list.append(interest_over_time_df)
 
@@ -102,10 +121,6 @@ def get_trend_result(result):
 
 def word_related(tags):
     tag_cluster = get_cluster(tags)
-    print('tag_cluster=')
-    print(tag_cluster)
     cluster_result = [extend_result(r) for r in tag_cluster]
-    # cluster_result = extend_result(cluster_result)
     result_list = get_trend_result(cluster_result)
-    print(result_list)
     return result_list

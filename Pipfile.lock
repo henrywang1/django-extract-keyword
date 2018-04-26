@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "568c05a6f5de8ebf6762ff62855b5eaf5efbd65f2dfbe70079205e511d570430"
+            "sha256": "7cc946438248f1a20e55665e19aa7a982496156dfd40f8aee9e9dde73032f10c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -28,17 +28,17 @@
         },
         "boto3": {
             "hashes": [
-                "sha256:bf80757e3c43be266c2aba2bc0943400c594dd240ce0a237d24dd63c9869bd46",
-                "sha256:d3253cf5d4690d67fe6866b5dd7810e6dbfa58fea4cb5d31c79c796688257ef0"
+                "sha256:30239a3c16da19c0a0886e7904195fb1a191dafc5773ad1656b7896577241cb5",
+                "sha256:413065f58f90c1a55c6aa43f023e95a12cf3b9032f958e78ededba86f040e8c3"
             ],
-            "version": "==1.7.9"
+            "version": "==1.7.10"
         },
         "botocore": {
             "hashes": [
-                "sha256:b0930e2d0e85ada3939a9cf52b1cdcd03d9b32a10a7598210a28c102b87074a7",
-                "sha256:bd90115c3edef80150ad53a83728b2d74300ee67abd9f897472feccb82950f8b"
+                "sha256:10d4880253210ad35cb1b3c3134d8698c2c2d10f15a2cf6a7be3f91b486866ff",
+                "sha256:3de8758600e692d5e31d74fb183c57409eb677b21e15608fcc1c059be47988e3"
             ],
-            "version": "==1.10.9"
+            "version": "==1.10.10"
         },
         "bz2file": {
             "hashes": [

@@ -15,3 +15,10 @@ keyword.sql
 jieba/jieba/analyse/idf.txt
 dict_with_cnt.txt
 keyword.sql
+extract/skip-gram-mc1
+extract/cluster_dict.pickle
+extract/favicon.ico
+extract/skip-gram-mc1.syn1neg.npy
+extract/skip-gram-mc1.wv.syn0.npy
+extract/test_aws.py
+extract/updateModel.py
