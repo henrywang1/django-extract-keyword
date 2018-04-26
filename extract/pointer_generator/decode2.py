@@ -19,11 +19,11 @@
 import os
 import time
 import tensorflow as tf
-import beam_search
-import data
+from . import beam_search
+from . import data
 import json
 import pyrouge
-import util
+from . import util
 import logging
 import numpy as np
 

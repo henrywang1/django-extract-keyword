@@ -4,11 +4,11 @@ import os
 import tensorflow as tf
 import numpy as np
 from collections import namedtuple
-from data import Vocab
-from batcher import Batcher
-from model import SummarizationModel
-from decode2 import BeamSearchDecoder
-import util
+from .data import Vocab
+from .batcher import Batcher
+from .model import SummarizationModel
+from .decode2 import BeamSearchDecoder
+from . import util
 from tensorflow.python import debug as tf_debug
 
 FLAGS = tf.app.flags.FLAGS
@@ -56,12 +56,12 @@ tf.app.flags.DEFINE_boolean('restore_best_model', True, 'Restore the best model 
 tf.app.flags.DEFINE_boolean('debug', False, "Run in tensorflow's debug mode (watches for NaN/inf values)")
 
 dirpath = os.path.dirname(os.path.abspath(__file__))
-vocab_path = 'pointer-generator/produce_data/finished_files/vocab'
-FLAGS.vocab_path = os.path.dirname(os.path.join(dirpath,vocab_path)) 
-log_root = 'pointer-generator/log/ho'
-FLAGS.log_root = os.path.dirname(os.path.join(dirpath,log_root)) 
-data_path = 'pointer-generator/produce_data/finished_files/test*'
-FLAGS.data_path = os.path.dirname(os.path.join(dirpath,data_path)) 
+vocab_path = 'produce_data/finished_files/vocab'
+FLAGS.vocab_path = os.path.join(dirpath,vocab_path)
+log_root = 'log/ho'
+FLAGS.log_root = os.path.join(dirpath,log_root)
+data_path = 'produce_data/finished_files/test*'
+FLAGS.data_path = os.path.join(dirpath,data_path)
 FLAGS.batch_size = FLAGS.beam_size
 FLAGS.single_pass = True
 

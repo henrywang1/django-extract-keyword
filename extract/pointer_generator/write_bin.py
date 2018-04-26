@@ -3,10 +3,11 @@ import struct
 from tensorflow.core.example import example_pb2
 import string
 import gc
-from .. import jieba
+import os
+import jieba
 dirpath = os.path.dirname(os.path.abspath(__file__))
-outfile = 'pointer-generator/produce_data/finished_files/test*'
-outfile = os.path.dirname(os.path.join(dirpath,outfile))
+outfile = 'produce_data/finished_files/test*'
+outfile = os.path.join(dirpath,outfile)
 
 SENTENCE_START = '<s>'
 SENTENCE_END = '</s>'
@@ -24,8 +25,8 @@ def get_space_content(data,mode='jieba'):
                 continue
             wds_list.append(wd)
         wds = wds_list
-        del wds_list
-        gc.collect()
+        #del wds_list
+        #gc.collect()
         wds = (' ').join(wds)
     else:
         wds = (d for d in data)

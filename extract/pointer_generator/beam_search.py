@@ -18,7 +18,7 @@
 
 import tensorflow as tf
 import numpy as np
-import data
+from . import data
 
 FLAGS = tf.app.flags.FLAGS
 

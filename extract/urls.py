@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
 from django.conf.urls import include
-from .views import KeywordView, TrendView
+from .views import KeywordView, TrendView, AbstractView
 
 app_name = 'extract'
 urlpatterns = [
