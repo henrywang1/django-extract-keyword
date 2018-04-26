@@ -14,6 +14,8 @@
                     <button class="btn btn-secondary cus-start" onclick="createAbstract()">Start</button>
                     <button id="copyTag" class="btn btn-secondary" style="display:none" onclick="copyAbstract()">Copy Abstract</button>
                 </div>
+                <!--<input type="hidden" id='abstract' />-->
+                <div id='abstract'></div>
                 <textarea placeholder="貼上要擷取關鍵字的文章!" rows="18" id='article' style="min-width: 100%"></textarea>
             </div>
             <div class=".col-xs-6 .col-md-4">
@@ -45,7 +47,8 @@
         });
         const csrftoken = Cookies.get('csrftoken');
         function copyAbstract() {
-            const tags = $('#tagsinput').tagsinput('items')
+            /*
+            const tags = $('#abstract').tagsinput('items')
             const tags_text = tags.map(x => x.split(" (")[0]);
             const dummy = document.createElement("input");
             document.body.appendChild(dummy);
@@ -57,6 +60,7 @@
             $("#success-alert").fadeTo(3000, 500).slideUp(500, function () {
                 $("#success-alert").slideUp(500);
             });
+    */
         }
 
         function createAbstract() {
@@ -77,15 +81,12 @@
             ).then(function (response) {
                 return response.json();
             }).then(function (myJson) {
-                $('#tagsinput').tagsinput('removeAll');
-                tags = []
-                for (s of myJson.tags) {
-                    textinput = s[0]+ ' (' + Number((s[1]).toFixed(2)) + '),'
-                    $('#tagsinput').tagsinput('add', textinput);
-                    tags.push(s[0]);
-                }
-
-                if(myJson.tags.length >0) {
+                console.log('myJson.abstract',myJson.abstract)
+                //$('#abstract').tagsinput('removeAll');
+                //$('#abstract').tagsinput('add', myJson.abstract);
+                //$('#abstract').val(myJson.abstract);
+                $('#abstract').html('摘要： '+myJson.abstract);
+                if(myJson.abstract.length >0) {
                     document.querySelector('#copyTag').style.display = '';
                     //console.log(tags)
                     //getTrend(tags);

@@ -80,6 +80,8 @@ def inference(FLAGS=FLAGS, vocab=vocab, hps=hps):
     batcher = Batcher(FLAGS.data_path, vocab, hps, single_pass=FLAGS.single_pass)
     model = SummarizationModel(decode_model_hps, vocab)
     #model.build_graph()
+    print('decoding...')
     decoder = BeamSearchDecoder(model, batcher, vocab)
     data = decoder.decode() # decode indefinitely (unless single_pass=True, in which case deocde the dataset exactly once)
+    print('decoded')
     return [d for d in data][0][0]

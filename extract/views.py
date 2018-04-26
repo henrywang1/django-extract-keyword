@@ -91,6 +91,7 @@ class AbstractView(LoginRequiredMixin, View):
     def post(self, request):
         try:
             article = request.POST.get('article')
+            print('article: ',article)
             #title = request.POST.get('title')
             #if title:
             #    article = (title + '\n')*10 + article
