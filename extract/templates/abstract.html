@@ -16,7 +16,7 @@
                 </div>
                 <!--<input type="hidden" id='abstract' />-->
                 <div id='abstract'></div>
-                <textarea placeholder="貼上要擷取關鍵字的文章!" rows="18" id='article' style="min-width: 100%"></textarea>
+                <textarea placeholder="貼上要生成摘要的文章!" rows="18" id='article' style="min-width: 100%"></textarea>
             </div>
             <div class=".col-xs-6 .col-md-4">
                 <div id='trend'>
@@ -85,9 +85,9 @@
                 //$('#abstract').tagsinput('removeAll');
                 //$('#abstract').tagsinput('add', myJson.abstract);
                 //$('#abstract').val(myJson.abstract);
-                $('#abstract').html('摘要： '+myJson.abstract);
+                $('#abstract').html('摘要： ' +myJson.abstract);
                 if(myJson.abstract.length >0) {
-                    document.querySelector('#copyTag').style.display = '';
+                    document.querySelector('#abstract').style.display = 'block';
                     //console.log(tags)
                     //getTrend(tags);
                 }
