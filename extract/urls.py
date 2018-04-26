@@ -7,6 +7,8 @@ from .views import KeywordView, TrendView
 app_name = 'extract'
 urlpatterns = [
     path('', views.index, name='detail'),
+    path('abstract_view', views.abstract, name='abstract'),
     path('vote/', KeywordView.as_view()),
     path('trend/', TrendView.as_view()),
+    path('abstract/', AbstractView.as_view()),
 ]

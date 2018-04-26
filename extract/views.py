@@ -7,6 +7,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 @login_required
 def index(request):
     return render(request, 'detail.html')
+
+def abstract(request):
+    return render(request, 'abstract.html')
     
 import sys
 import os
@@ -23,6 +26,8 @@ from django.http import JsonResponse
 from django.dispatch import receiver
 from django.db.models.signals import post_save, post_delete
 from .trend import word_related
+from .pointer-generator.write_bin import write_to_bin 
+from .pointer-generator.inference import inference
 
 
 def keyword_saved_handler(sender, instance, **kwargs):
@@ -77,3 +82,19 @@ class KeywordView(LoginRequiredMixin, View):
     def delete_stop_word(sender, instance, **kwargs):
         #print('delete stop' + str(instance))
         jieba.analyse.del_stop_word(str(instance))
+
+class AbstractView(LoginRequiredMixin, View):
+    def __init__(self, *args, **kwargs):
+        self.login_url = '/login/'
+
+    def post(self, request):
+        try:
+            article = request.POST.get('article')
+            #title = request.POST.get('title')
+            #if title:
+            #    article = (title + '\n')*10 + article
+            write_to_bin(article)
+            abstract = inference()
+            return JsonResponse({'abstract': abstract})
+        except (KeyError):
+            return JsonResponse({'abstract':''})

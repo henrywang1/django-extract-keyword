@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="alert alert-success cus-alert" id="success-alert">
+          <button type="button" class="close" data-dismiss="alert">x</button>
+          <strong>Success! </strong>
+    </div>
+    <div class="container cus-tag-container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-8">
+                <div class="start-container">
+                    <h2 class="demo-title">摘要生成</h2>
+                    <button class="btn btn-secondary cus-start" onclick="createAbstract()">Start</button>
+                    <button id="copyTag" class="btn btn-secondary" style="display:none" onclick="copyAbstract()">Copy Tags</button>
+                </div>
+                <input value="" data-role="tagsinput" id='tagsinput' placeholder="輸入自訂關鍵字 (optional)" />
+                <textarea placeholder="貼上要擷取關鍵字的文章!" rows="18" id='article' style="min-width: 100%"></textarea>
+            </div>
+            <div class=".col-xs-6 .col-md-4">
+                <div id='trend'>
+                    <!-- <ul>
+                            <li>Coffee</li>
+                            <li>Tea</li>
+                            <li>Milk</li>
+                            <li>Coke</li>
+                            <li>Soda</li>
+                         </ul> -->
+                </div>
+            </div>
+        </div>
+        <a href="#" class="top-link">Go to Top</a>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src= "{% static "vendor/jquery/jquery.min.js" %}"></script>
+    <script src= "{% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <!-- Bootstrap tags -->
+    <script src="{% static "vendor/tagsinput/tagsinput.js" %}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#success-alert").hide();
+        });
+        const csrftoken = Cookies.get('csrftoken');
+        function copyAbstract() {
+            const tags = $('#tagsinput').tagsinput('items')
+            const tags_text = tags.map(x => x.split(" (")[0]);
+            const dummy = document.createElement("input");
+            document.body.appendChild(dummy);
+            dummy.setAttribute('value', tags_text);
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+            $("#success-alert").text("已複製: " + tags_text);
+            $("#success-alert").fadeTo(3000, 500).slideUp(500, function () {
+                $("#success-alert").slideUp(500);
+            });
+        }
+
+        function createAbstract() {
+            const formData = new FormData();
+            const articleContent = document.querySelector('#article').value
+            formData.append('article', articleContent);
+
+            fetch('/abstract/', {
+                method: 'post',
+                credentials: "same-origin",
+                headers: {
+                    "X-CSRFToken": csrftoken,
+                    "Accept": "application/json",
+                },
+                body: formData
+            }
+
+            ).then(function (response) {
+                return response.json();
+            }).then(function (myJson) {
+                $('#tagsinput').tagsinput('removeAll');
+                tags = []
+                for (s of myJson.tags) {
+                    textinput = s[0]+ ' (' + Number((s[1]).toFixed(2)) + '),'
+                    $('#tagsinput').tagsinput('add', textinput);
+                    tags.push(s[0]);
+                }
+
+                if(myJson.tags.length >0) {
+                    document.querySelector('#copyTag').style.display = '';
+                    //console.log(tags)
+                    //getTrend(tags);
+                }
+                
+            });
+        }
+    </script>
+{% endblock %}
