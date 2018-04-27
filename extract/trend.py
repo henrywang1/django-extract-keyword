@@ -9,7 +9,7 @@ import gensim
 from sklearn import cluster
 import math
 import pandas as pd
-from .models import Word2VecModel
+# from .models import Word2VecModel
 import os.path
 
 import boto3
@@ -45,7 +45,7 @@ download_from_s3('cluster_dict.pickle')
 with open (tmp_path + 'cluster_dict.pickle', 'rb') as f:
      cluster_dict = pickle.load(f)
 
-model = gensim.models.Word2Vec.load(tmp_path + 'skip-gram-mc1') 
+# model = gensim.models.Word2Vec.load(tmp_path + 'skip-gram-mc1') 
 dict_relate = {}
 
 def get_cluster(input_list):
