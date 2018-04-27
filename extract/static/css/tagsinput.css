@@ -44,10 +44,6 @@ h2.demo-title {
   outline: none;
 }
 
-#article {
-  margin-bottom: 40px;
-}
-
 
 /*
  * bootstrap-tagsinput v0.8.0
@@ -160,3 +156,12 @@ h2.demo-title {
   }
 }
 
+
+#abstract {
+  margin-top: 5px;
+  margin-bottom: 15px;
+  padding: 5px;
+  border: solid 1px #ced4da;
+  border-radius: 2px;
+  display: none;
+}
