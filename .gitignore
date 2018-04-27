@@ -5,15 +5,12 @@ staticfiles
 .DS_Store
 .vscode
 
-local_test.py
 pg_command.txt
 command2.txt
 db.sqlite3
 .ipynb_checkpoints/Untitled-checkpoint.ipynb
 Untitled.ipynb
 keyword.sql
-jieba/jieba/analyse/idf.txt
-dict_with_cnt.txt
 keyword.sql
 extract/skip-gram-mc1
 extract/cluster_dict.pickle
@@ -22,3 +19,5 @@ extract/skip-gram-mc1.syn1neg.npy
 extract/skip-gram-mc1.wv.syn0.npy
 extract/test_aws.py
 extract/updateModel.py
+extract/pointer_generator/produce_data/finished_files/test*
+extract/pointer_generator/produce_data/finished_files/test*
