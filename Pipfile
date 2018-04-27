@@ -12,6 +12,8 @@ pytrends = "*"
 gensim = "*"
 sklearn = "*"
 "boto3" = "*"
+tensorflow = "==1.4.1"
+pyrouge = "*"
 
 [requires]
 python_version = "3.6"

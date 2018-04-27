@@ -69,7 +69,7 @@ hparam_list = ['mode', 'lr', 'adagrad_init_acc', 'rand_unif_init_mag', 'trunc_no
 hps_dict = {}
 for key,val in FLAGS.__flags.items(): # for each flag
   if key in hparam_list: # if it's in the list
-    hps_dict[key] = val._value # add it to the dict
+    hps_dict[key] = val # add it to the dict
 hps = namedtuple("HParams", hps_dict.keys())(**hps_dict)
 
 vocab = Vocab(FLAGS.vocab_path, FLAGS.vocab_size) # create a vocabulary

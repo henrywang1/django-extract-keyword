@@ -11,15 +11,15 @@ import math
 import pandas as pd
 import os.path
 
-import boto3
-import botocore
+# import boto3
+# import botocore
 import os
 tmp_path = './extract/'
-os.makedirs(tmp_path, exist_ok=True)
-
+#os.makedirs(tmp_path, exist_ok=True)
 # BUCKET_NAME = 'w2v-us-east-1' # replace with your bucket name
-#KEY = 'skip-gram-mc1' # replace with your object key
+# #KEY = 'skip-gram-mc1' # replace with your object key
 # s3 = boto3.resource('s3')
+
 # def download_from_s3(file_name):
 #     file_path = tmp_path + file_name
 #     print('start to download from: ' + file_name + ' to: ' + file_path) 
@@ -34,23 +34,25 @@ os.makedirs(tmp_path, exist_ok=True)
 #             print("The object does not exist.")
 #         else:
 #             raise
-from sklearn import preprocessing
+
 # download_from_s3('skip-gram-mc1')
 # download_from_s3('skip-gram-mc1.syn1neg.npy')
 # download_from_s3('skip-gram-mc1.wv.syn0.npy')
 # download_from_s3('cluster_dict.pickle')
+
 with open (tmp_path + 'cluster_dict.pickle', 'rb') as f:
-    cluster_dict = pickle.load(f)
-# model = gensim.models.Word2Vec.load(tmp_path + 'skip-gram-mc1') 
+     cluster_dict = pickle.load(f)
+
+model = gensim.models.Word2Vec.load(tmp_path + 'skip-gram-mc1') 
 dict_relate = {}
 
 def get_cluster(input_list):
     NUM_CLUSTERS = math.ceil(len(input_list)/5)
     input_list_new = [i for i in input_list if i in cluster_dict]
-    labels = [cluster_dict[i] for i in input_list]
-
-    le = preprocessing.LabelEncoder()
-    labels = le.fit_transform(labels)
+    kmeans = cluster.KMeans(n_clusters=NUM_CLUSTERS)
+    X = model[input_list_new]
+    kmeans.fit(X)
+    labels = kmeans.labels_
 
     final_list = [[] for i in range(NUM_CLUSTERS)]
     for idx, item in enumerate(input_list_new):
@@ -59,6 +61,7 @@ def get_cluster(input_list):
 
     input_list_old = [i for i in input_list if i not in input_list_new]
     final_list.append(input_list_old)
+    
     return final_list
 
 def get_topk_related(keyword, k=3):

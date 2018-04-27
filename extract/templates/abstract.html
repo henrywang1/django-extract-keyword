@@ -66,6 +66,9 @@
         function createAbstract() {
             const formData = new FormData();
             const articleContent = document.querySelector('#article').value
+            //document.querySelector('#abstract').style.display = 'block';
+            //$('#abstract').html('摘要： ' + articleContent);
+            //return
             formData.append('article', articleContent);
 
             fetch('/abstract/', {
