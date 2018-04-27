@@ -23,12 +23,13 @@ BUCKET_NAME = 'w2v-us-east-1' # replace with your bucket name
 s3 = boto3.resource('s3')
 
 def download_from_s3(file_name):
-    print('start to download: ' + file_name)
-    if os.path.isfile(tmp_path + file_name):
+    file_path = tmp_path + file_name
+    print('start to download from: ' + file_name + ' to: ' + file_path) 
+    if os.path.isfile(file_path):
         print("File already exist")
         return
     try:
-        s3.Bucket(BUCKET_NAME).download_file(file_name, file_name)
+        s3.Bucket(BUCKET_NAME).download_file(file_name, file_path)
         print("download complete")
     except botocore.exceptions.ClientError as e:
         if e.response['Error']['Code'] == "404":
