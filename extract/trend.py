@@ -36,10 +36,10 @@ def download_from_s3(file_name):
             print("The object does not exist.")
         else:
             raise
-
-download_from_s3('skip-gram-mc1')
-download_from_s3('skip-gram-mc1.syn1neg.npy')
-download_from_s3('skip-gram-mc1.wv.syn0.npy')
+from sklearn import preprocessing
+# download_from_s3('skip-gram-mc1')
+# download_from_s3('skip-gram-mc1.syn1neg.npy')
+# download_from_s3('skip-gram-mc1.wv.syn0.npy')
 download_from_s3('cluster_dict.pickle')
 
 with open (tmp_path + 'cluster_dict.pickle', 'rb') as f:
@@ -51,10 +51,10 @@ dict_relate = {}
 def get_cluster(input_list):
     NUM_CLUSTERS = math.ceil(len(input_list)/5)
     input_list_new = [i for i in input_list if i in cluster_dict]
-    kmeans = cluster.KMeans(n_clusters=NUM_CLUSTERS)
-    X = model[input_list_new]
-    kmeans.fit(X)
-    labels = kmeans.labels_
+    labels = [cluster_dict[i] for i in input_list]
+
+    le = preprocessing.LabelEncoder()
+    labels = le.fit_transform(labels)
 
     final_list = [[] for i in range(NUM_CLUSTERS)]
     for idx, item in enumerate(input_list_new):
@@ -63,7 +63,6 @@ def get_cluster(input_list):
 
     input_list_old = [i for i in input_list if i not in input_list_new]
     final_list.append(input_list_old)
-    
     return final_list
 
 def get_topk_related(keyword, k=3):
