@@ -14,6 +14,9 @@ import os.path
 
 import boto3
 import botocore
+import os
+tmp_path = '/tmp/myapp/'
+os.makedirs(tmp_path, exist_ok=True)
 
 BUCKET_NAME = 'w2v-us-east-1' # replace with your bucket name
 #KEY = 'skip-gram-mc1' # replace with your object key
@@ -21,11 +24,12 @@ s3 = boto3.resource('s3')
 
 def download_from_s3(file_name):
     print('start to download: ' + file_name)
-    if os.path.isfile('./extract/' + file_name):
+    if os.path.isfile(tmp_path + file_name):
         print("File already exist")
         return
     try:
         s3.Bucket(BUCKET_NAME).download_file(file_name, file_name)
+        print("download complete")
     except botocore.exceptions.ClientError as e:
         if e.response['Error']['Code'] == "404":
             print("The object does not exist.")
@@ -37,10 +41,10 @@ download_from_s3('skip-gram-mc1.syn1neg.npy')
 download_from_s3('skip-gram-mc1.wv.syn0.npy')
 download_from_s3('cluster_dict.pickle')
 
-with open ('./extract/cluster_dict.pickle', 'rb') as f:
+with open (tmp_path + 'cluster_dict.pickle', 'rb') as f:
      cluster_dict = pickle.load(f)
 
-model = gensim.models.Word2Vec.load('./extract/skip-gram-mc1') 
+model = gensim.models.Word2Vec.load(tmp_path + 'skip-gram-mc1') 
 dict_relate = {}
 
 def get_cluster(input_list):
