@@ -53,8 +53,8 @@ def get_stop_words(file_name):
                     'invalid dictionary entry in %s at Line %s: %s' % (file_name, lineno, line))
     return ret
 
-stop_words = get_stop_words('./ntub_stop_words.txt')
-key_words = get_user_dict('./dict_with_cnt.txt')
+stop_words = get_stop_words('extract/ntub_stop_words.txt')
+key_words = get_user_dict('extract/dict_with_cnt.txt')
 #print(len(stop_words))
 
 # ntub_stop_words.txt

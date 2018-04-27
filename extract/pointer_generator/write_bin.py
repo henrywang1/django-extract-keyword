@@ -6,13 +6,13 @@ import gc
 import os
 import jieba
 dirpath = os.path.dirname(os.path.abspath(__file__))
-outfile = 'produce_data/finished_files/test*'
+outfile = 'produce_data/finished_files/test.bin'
 outfile = os.path.join(dirpath,outfile)
 
 SENTENCE_START = '<s>'
 SENTENCE_END = '</s>'
 
-def get_space_content(data,mode='jieba'):
+def get_space_content(data,mode='single'):
     if mode == 'jieba':
         wds = jieba.cut(data)
         wds = map(lambda x:x.strip(),wds)
@@ -27,11 +27,11 @@ def get_space_content(data,mode='jieba'):
         wds = wds_list
         #del wds_list
         #gc.collect()
-        wds = (' ').join(wds)
     else:
-        wds = (d for d in data)
+        wds = [d for d in data]
         wds = map(lambda x:x.strip(),wds)
         wds = list(filter(lambda x:len(x)>0,wds))
+    wds = (' ').join(wds)
     return wds
 
 def read_text_file(text_file):
