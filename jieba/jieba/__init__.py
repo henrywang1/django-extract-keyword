@@ -47,7 +47,7 @@ escape_items = ['\-', '_', '\.'] #有些符號有連接的意思
 for item in escape_items:
     all_punct = all_punct.replace(item, '')
 re_skip_default_all_punct = re.compile(
-    r"([\r\n\uFF1F-\uFF2D\uFF01-\uFF1E\u3001-\u30AD{}]+)"
+    r"([\r\n\uFF1F-\uFF2D\uFF01-\uFF1E\u3001-\u30AD\u2192\u25CF\u25CB{}]+)"
     .format(all_punct), re.U)
 re_han_cut_all = re.compile("([\u4E00-\u9FD5\u00B7]+)", re.U) #\u00B7 is the big dot
 re_skip_cut_all = re.compile("[^a-zA-Z0-9+#\n]", re.U)

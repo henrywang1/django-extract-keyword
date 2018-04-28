@@ -6,7 +6,6 @@ import jieba.analyse
 class ExtractConfig(AppConfig):
     name = 'extract'
     def ready(self):
-        #from .views import keyword_saved_handler
         from .views import KeywordView
         from .models import Keyword, StopWord
         post_save.connect(KeywordView.add_keyword, sender=Keyword)
