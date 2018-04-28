@@ -11,6 +11,7 @@ $ pipenv install
 $ python manage.py migrate
 $ python manage.py collectstatic
 $ python manage.py run server
+```
 
 ## 功能說明
 1. 關鍵字擷取
