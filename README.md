@@ -1,44 +1,23 @@
-# Python: Getting Started
-
-A barebones Django app, which can easily be deployed to Heroku.
-
-This application supports the [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python) article - check it out.
+# Extract Keyword
 
 ## Running Locally
-
-Make sure you have Python [installed properly](http://install.python-guide.org). Also, install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) and [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
+Make sure you have Python [installed properly](http://install.python-guide.org). 
 
 ```sh
-$ git clone git@github.com:heroku/python-getting-started.git
+$ git clone git@gitlab.aiacademy.tw:at071095/final-cw.git
 $ cd python-getting-started
 
 $ pipenv install
-
-$ createdb python_getting_started
-
 $ python manage.py migrate
 $ python manage.py collectstatic
-
-$ heroku local
+$ python manage.py run server
 ```
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+## 功能說明
+1. 關鍵字擷取
+2. 查詢 Google Trend 列出相關字及趨勢
+3. 提供方便使用的網站及後台，
+4. 使用者可自訂關鍵字及停用字
+5. 標題產生的功能，因為還在實驗階段，暫時移除
 
-## Deploying to Heroku
 
-```sh
-$ heroku create
-$ git push heroku master
-
-$ heroku run python manage.py migrate
-$ heroku open
-```
-or
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-## Documentation
-
-For more information about using Python on Heroku, see these Dev Center articles:
-
-- [Python on Heroku](https://devcenter.heroku.com/categories/python)
