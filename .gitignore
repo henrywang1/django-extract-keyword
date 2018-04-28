@@ -11,13 +11,11 @@ db.sqlite3
 .ipynb_checkpoints/Untitled-checkpoint.ipynb
 Untitled.ipynb
 keyword.sql
-keyword.sql
-extract/skip-gram-mc1
 
 extract/favicon.ico
-extract/skip-gram-mc1.syn1neg.npy
-extract/skip-gram-mc1.wv.syn0.npy
+
 extract/test_aws.py
 extract/updateModel.py
 extract/pointer_generator/produce_data/finished_files/test*
 extract/pointer_generator/produce_data/finished_files/test*
+.vscode
