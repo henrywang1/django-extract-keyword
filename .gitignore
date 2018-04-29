@@ -19,3 +19,6 @@ extract/updateModel.py
 extract/pointer_generator/produce_data/finished_files/test*
 extract/pointer_generator/produce_data/finished_files/test*
 .vscode
+extract/pointer_generator/produce_data/finished_files/test*
+extract/visual.ipynb
+extract/.ipynb_checkpoints/visual-checkpoint.ipynb
