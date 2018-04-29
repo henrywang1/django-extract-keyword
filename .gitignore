@@ -7,7 +7,6 @@ staticfiles
 
 pg_command.txt
 command2.txt
-db.sqlite3
 .ipynb_checkpoints/Untitled-checkpoint.ipynb
 Untitled.ipynb
 keyword.sql
@@ -22,3 +21,4 @@ extract/pointer_generator/produce_data/finished_files/test*
 extract/pointer_generator/produce_data/finished_files/test*
 extract/visual.ipynb
 extract/.ipynb_checkpoints/visual-checkpoint.ipynb
+local_test.py
