@@ -76,24 +76,24 @@ WSGI_APPLICATION = 'gettingstarted.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-print(os.path.join(BASE_DIR, 'db.sqlite3'))
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'extract_local',                      
-#         # 'USER': 'db_user',
-#         # 'PASSWORD': 'db_user_password',
-#         # 'HOST': '',
-#         'PORT': 5432,
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'extract_local',                      
+        # 'USER': 'db_user',
+        # 'PASSWORD': 'db_user_password',
+        # 'HOST': '',
+        'PORT': 5432,
+    }
+}
 
 
 # Password validation

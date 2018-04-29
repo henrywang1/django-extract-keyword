@@ -3,7 +3,7 @@ from .models import Keyword, StopWord
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .trend import word_related
+#from .trend import word_related
 
 # 摘要生成
 # from .pointer_generator.write_bin import write_to_bin 
@@ -29,19 +29,20 @@ import jieba.analyse
 from django.http import JsonResponse
 
 
-class TrendView(LoginRequiredMixin, View):
-    def post(self, request):
-        try:
-            tags = request.POST.get('tags')
-            tags = tags.split(',')
-            for t in tags:
-                print(t)
-            print(tags)
-            if tags:
-                ret = (word_related(tags))
-                return JsonResponse({'trend': ret})
-        except (KeyError):
-            return JsonResponse({'trend':''})
+# need to train the Word2Vec model
+# class TrendView(LoginRequiredMixin, View):
+#     def post(self, request):
+#         try:
+#             tags = request.POST.get('tags')
+#             tags = tags.split(',')
+#             for t in tags:
+#                 print(t)
+#             print(tags)
+#             if tags:
+#                 ret = (word_related(tags))
+#                 return JsonResponse({'trend': ret})
+#         except (KeyError):
+#             return JsonResponse({'trend':''})
 
 class KeywordView(LoginRequiredMixin, View):
     def __init__(self, *args, **kwargs):
