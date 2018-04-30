@@ -19,3 +19,16 @@ extract/pointer_generator/produce_data/finished_files/test*
 extract/visual.ipynb
 extract/.ipynb_checkpoints/visual-checkpoint.ipynb
 local_test.py
+extract/_migrations_/0006_auto_20180419_0605.py
+extract/_migrations_/0001_initial.py
+extract/_migrations_/0001_squashed_0007_stopword.py
+extract/_migrations_/0002_auto_20180418_1758.py
+extract/_migrations_/0002_auto_20180420_1047.py
+extract/_migrations_/0003_auto_20180419_0212.py
+extract/_migrations_/0003_auto_20180423_0249.py
+extract/_migrations_/0004_auto_20180419_0310.py
+extract/_migrations_/0004_word2vec.py
+extract/_migrations_/0005_auto_20180419_0315.py
+extract/_migrations_/0005_auto_20180426_1650.py
+extract/_migrations_/0006_delete_word2vecmodel.py
+extract/_migrations_/0007_stopword.py

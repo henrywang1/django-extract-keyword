@@ -3,9 +3,16 @@ from django.db.models.signals import post_save, post_delete
 import jieba
 import jieba.analyse
 
+from django.db import connection
+def db_table_exists(table_name):
+    return table_name in connection.introspection.table_names()
+
 class ExtractConfig(AppConfig):
     name = 'extract'
     def ready(self):
+        if not db_table_exists('extract'):
+            return 
+
         from .views import KeywordView
         from .models import Keyword, StopWord
         post_save.connect(KeywordView.add_keyword, sender=Keyword)
