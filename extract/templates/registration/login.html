@@ -22,7 +22,7 @@
 							<form action="{% url 'login' %}" method="post" class="form-horizontal mt-5" role="form">{% csrf_token %}
 								<div class="form-group">
 									<label for="email">{{form.username.label_tag}}</label>
-									<input id='id_username' class="form-control" name="username" value="cwuser" readonly>
+									<input id='id_username' class="form-control" name="username">
 								</div>
 
 								<div class="form-group">
