@@ -5,7 +5,7 @@ Make sure you have Python [installed properly](http://install.python-guide.org).
 
 ```sh
 $ git clone https://github.com/henrywang1/django_extract_keyword.git
-$ cd final-cw
+$ cd django_extract_keyword
 
 $ pipenv install
 $ python manage.py migrate
