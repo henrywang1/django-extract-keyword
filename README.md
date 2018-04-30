@@ -4,7 +4,7 @@
 Make sure you have Python [installed properly](http://install.python-guide.org). 
 
 ```sh
-$ git clone git@gitlab.aiacademy.tw:at071095/final-cw.git
+$ git clone https://github.com/henrywang1/django_extract_keyword.git
 $ cd final-cw
 
 $ pipenv install
