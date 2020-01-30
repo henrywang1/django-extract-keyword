@@ -12,7 +12,7 @@ pytrends = "*"
 gensim = "*"
 sklearn = "*"
 "boto3" = "*"
-tensorflow = "==1.4.1"
+tensorflow = "==1.15.2"
 pyrouge = "*"
 
 [requires]
