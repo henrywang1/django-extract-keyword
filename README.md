@@ -1,6 +1,12 @@
-# Extract Keyword
+# Django Extract Keyword
+![Demo](demo.png)
 
-## Running Locally
+This is a Python Django website for Chinese article keyword extraction.
+This project is done at [Taiwan AI Academy](https://en.aiacademy.tw/).
+
+[Demo Site](https://serene-stream-44779.herokuapp.com/)
+
+## Local Test
 Make sure you have Python [installed properly](http://install.python-guide.org). 
 
 ```sh
@@ -13,25 +19,8 @@ $ python manage.py collectstatic
 $ python manage.py run server
 ```
 
-## 批次處理文章
-```sh
-$ python batch_process.py
-
-```
-### 輸入
-- 檔案名稱: input.csv
-- 需求欄位: title, content
-
-### 輸出
-- 檔案名稱: output.csv
-- 增加欄位: predict_tags
-
-
-## 功能說明
-1. 關鍵字擷取
-2. 查詢 Google Trend 列出相關字及趨勢
-3. 提供方便使用的網站及後台，
-4. 使用者可自訂關鍵字及停用字
-5. 標題產生的功能，因為還在實驗階段，暫時移除
-
-
+## Features
+1. Extract article keywords
+2. Check Google Trend, and list related words
+3. Django based user interface
+4. Support user defined keyword and stop word
